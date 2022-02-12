@@ -42,6 +42,11 @@ volatile TIMER_t* TIMERx;
 #define TIM3  					( ( volatile TIMER_t* ) TIMER3_BASE_ADDRESS )
 #define TIM4  					( ( volatile TIMER_t* ) TIMER4_BASE_ADDRESS )
 
+/* Delays Configurations*/
+#define OVERFLOW_VALUE (0xFFFF-1)
+#define PRESCALAR (72-1) // Tick Time is 1 Micro Second
+#define ONE_MILLISECOND 1000
+
 
 
  

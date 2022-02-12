@@ -340,6 +340,56 @@ void MTimer_voidSelectChannel(u8 Copy_u8TimerNum, u8 Copy_u8ChannelNum,u16 Copy_
 			}
 }
 
+/*#define OVERFLOW_VALUE 65535
+#define PRESCALAR 1024
+#define TICK_TIME (1024.0/1000000.0)
+#define MILLISECOND_SCALAR 1000.0
+#define OVERFLOW_FLAG_BIT 0
+void MTimer_delay_ms(float Copy_f_Time_MS)
+{
+	 Initialize Timer 4
+	MTimer_voidInit(TIMER4, UPCOUNTING_MODE, PRESCALAR, OVERFLOW_VALUE);
+	 Counter Of Overflow Occurance
+	u16 Local_u16_Counter = -1;
+	 Pre_Estimating Of Overflow Number
+	u8 	Local_u8_OverFlows_num = (u16)(((float)(Copy_f_Time_MS/MILLISECOND_SCALAR)/TICK_TIME) / OVERFLOW_VALUE);
+
+	while(Local_u16_Counter != Local_u8_OverFlows_num)
+	{
+		 Checking Overflow Flag
+		if(GETBIT(TTIMERx->TIM_SR, OVERFLOW_FLAG_BIT))
+		{
+			Local_u16_Counter++;
+			Re-initialize the counter
+			SET_BIT(TIMERx->TIM_EGR, 0);
+			Clear Flag
+			CLR_BIT(TTIMERx->TIM_SR, OVERFLOW_FLAG_BIT);
+		}
+	}
+}*/
+
+void MTimer_Delay_us(u16 Copy_Time_US)
+{
+	 /*Initialize Timer 4*/
+	MTimer_voidInit(TIMER4, UPCOUNTING_MODE, PRESCALAR, OVERFLOW_VALUE);
+
+	/* Re-initialize the counter */
+	SET_BIT(TIMERx->TIM_EGR, 0);
+
+	while(TIMERx->TIM_CNT < Copy_Time_US)
+	{
+		/* Loop Until Reaching The Required Count(Time) */
+	}
+}
+
+void MTimer_Delay_ms(u16 Copy_Time_MS)
+{
+	for(u16 Local_Iterator =0; Local_Iterator < Copy_Time_MS; Local_Iterator++)
+	{
+		/* Delay In Milliseconds*/
+		MTimer_Delay_us(ONE_MILLISECOND);
+	}
+}
 
 void TIM1_IRQHandler(void)
 {

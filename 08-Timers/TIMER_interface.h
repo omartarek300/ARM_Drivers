@@ -63,5 +63,19 @@ void MTimer_voidEnablePWM(u8 Copy_u8TimerNum, u8 Copy_u8ChannelNum);
 */
 void MTimer_voidSelectChannel(u8 Copy_u8TimerNum, u8 Copy_u8ChannelNum,u16 Copy_u16DutyCycle);
 
+/*******
+	Function Description: This Function Delays The Controller For Microseconds
+	parameter: Copy_Time_US  : Number Of Microseconds Required For Delay
+	return: none
+*/
+void MTimer_Delay_us(u16 Copy_Time_US);
+
+/*******
+	Function Description: This Function Delays The Controller For Milliseconds
+	parameter: Copy_Time_MS  : Number Of Milliseconds Required For Delay
+	return: none
+*/
+void MTimer_Delay_ms(u16 Copy_Time_MS);
+
 #endif
   
