@@ -373,6 +373,9 @@ void MTimer_Delay_us(u16 Copy_Time_US)
 	 /*Initialize Timer 4*/
 	MTimer_voidInit(TIMER4, UPCOUNTING_MODE, PRESCALAR, OVERFLOW_VALUE);
 
+	/* Select Timer 4*/
+	TIMERx = (volatile TIMER_t*)TIMER4_BASE_ADDRESS;
+
 	/* Re-initialize the counter */
 	SET_BIT(TIMERx->TIM_EGR, 0);
 
